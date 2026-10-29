@@ -2,7 +2,12 @@
 (function () {
   'use strict';
   var root = document.getElementById('topo');
-  if (!root || !window.TOPO) return;
+  if (!root) return;
+  if (!window.TOPO) { // topology-data.js did not load (e.g. forgotten when copying the site)
+    root.querySelector('.topo-side').textContent = 'Map data failed to load.';
+    console.warn('[maps] topology-data.js is missing');
+    return;
+  }
   var NS = 'http://www.w3.org/2000/svg', W = 176, H = 60;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -240,7 +245,7 @@
   }, { passive: false });
   svg.addEventListener('touchmove', function (e) {
     if (e.touches.length > 1) { if (e.cancelable) e.preventDefault(); } // two fingers belong to the map
-    else hint('Use two fingers to move the map');
+    else if (!hintEl.classList.contains('show')) hint('Use two fingers to move the map');
   }, { passive: false });
   svg.addEventListener('dblclick', function (e) { if (!e.target.closest('.t-node')) fit(); });
 
