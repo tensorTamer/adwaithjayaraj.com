@@ -112,4 +112,5 @@
     d.addEventListener('visibilitychange', function () { cancelAnimationFrame(raf); if (heroOn && !d.hidden) loop(); });
   }
   var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { size(); drawStatic(); }, 150); });
+  root.classList.add('ready'); // last line: tells the CSS fallback that setup finished
 })();

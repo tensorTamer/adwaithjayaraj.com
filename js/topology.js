@@ -135,50 +135,59 @@
   }, {
     id: 'cnet', name: 'CNET Lab Redesign', status: 'design', badge: 'Design', note: 'Holland College coursework design',
     summary: 'My proposed redesign of the second-year lab: firewall-routed VLANs, a Hyper-V failover cluster on shared iSCSI storage, an ESXi host for the web course, and one isolated network per student.',
-    w: 1630, h: 770,
+    w: 1630, h: 794,
     zones: [
-      { x: 20, y: 300, w: 190, h: 160, name: 'Wi-Fi', meta: 'VLAN 98 · 172.16.98.0/24' },
-      { x: 230, y: 300, w: 190, h: 300, name: 'Servers', meta: 'VLAN 50 · 172.16.50.0/24' },
-      { x: 440, y: 300, w: 620, h: 200, name: 'Management', meta: 'VLAN 9 · 172.16.9.0/24' },
-      { x: 440, y: 550, w: 620, h: 200, name: 'Storage', meta: 'VLAN 60 · 172.16.60.0/24 · not routed' },
-      { x: 1100, y: 300, w: 200, h: 160, name: 'Lab PCs', meta: 'VLAN 99 · 172.16.99.0/24' },
-      { x: 1320, y: 300, w: 290, h: 160, name: 'Students', meta: 'VLANs 201–224 · 172.16.(200+N).0/24' }
+      { x: 20, y: 324, w: 190, h: 160, name: 'Wi-Fi', meta: 'VLAN 98 · 172.16.98.0/24' },
+      { x: 230, y: 324, w: 190, h: 300, name: 'Servers', meta: 'VLAN 50 · 172.16.50.0/24' },
+      { x: 440, y: 324, w: 620, h: 200, name: 'Management', meta: 'VLAN 9 · 172.16.9.0/24' },
+      { x: 440, y: 574, w: 620, h: 200, name: 'Storage', meta: 'VLAN 60 · 172.16.60.0/24 · not routed' },
+      { x: 1100, y: 324, w: 200, h: 160, name: 'Lab PCs', meta: 'VLAN 99 · 172.16.99.0/24' },
+      { x: 1320, y: 324, w: 290, h: 160, name: 'Students', meta: 'VLANs 201–224 · 172.16.(200+N).0/24' }
     ],
     nodes: [
       { id: 'fgt', t: 'firewall', x: 800, y: 50, host: 'FortiGate-501E', role: 'Routes every VLAN', st: 'design', ifs: ['One sub-interface per VLAN, gateway .1 on each', 'LACP uplink on Gi1/0/23 and Gi2/0/48 (802.1Q trunk, native VLAN 999)'], svc: ['Routes and filters every VLAN', 'Zones: Management, Servers, Lab PCs, Wi-Fi, Students', 'Traffic between student VLANs denied'], why: 'Every VLAN is routed through the firewall, so all traffic between networks is filtered.' },
       { id: 'sw', t: 'switch', x: 800, y: 200, host: 'Cisco 3750-X stack', role: 'Layer 2 core', st: 'design', svc: ['Trunks restricted to needed VLANs', 'Unused ports parked in VLAN 999', 'Port security, BPDU guard, DHCP snooping', 'SSH only'], why: 'Layer 2 only: routing stays on the FortiGate, and unused ports sit in VLAN 999.' },
-      { id: 'ap', t: 'ap', x: 115, y: 390, host: 'FortiAP FAP221E', role: 'Wireless AP', st: 'design', ifs: ['Gi1/0/22 trunk (VLANs 9, 98)'], svc: ['WPA3-Enterprise SSID on VLAN 98'] },
-      { id: 'dc1', t: 'server', x: 325, y: 390, host: 'DC1', role: 'AD DS · DNS · DHCP', st: 'design', ip: '172.16.50.200', ips: ['172.16.50.200'], ifs: ['Teamed on Gi1/0/1 and Gi2/0/47'], svc: ['AD DS', 'DNS', 'DHCP (failover with DC2)', 'NPS'] },
-      { id: 'dc2', t: 'server', x: 325, y: 525, host: 'DC2', role: 'DC · VM on ESX1', st: 'design', ip: '172.16.50.202', ips: ['172.16.50.202'], svc: ['Second domain controller', 'Runs as a VM on ESX1'], why: 'DHCP failover partner for DC1.' },
-      { id: 'h1', t: 'server', x: 545, y: 390, host: 'PSWSCL1', role: 'Hyper-V cluster node', st: 'design', ip: '172.16.9.11', ips: ['172.16.9.11 (management)', '172.16.60.21 (iSCSI)'], ifs: ['SET team Gi1/0/3 + Gi2/0/43 (trunk 9, 50, 201–224)', 'iSCSI on Te1/1/1'], svc: ['Hyper-V failover cluster node'], why: 'Two cluster nodes on shared iSCSI storage.' },
-      { id: 'h2', t: 'server', x: 745, y: 390, host: 'PSWSCL2', role: 'Hyper-V cluster node', st: 'design', ip: '172.16.9.12', ips: ['172.16.9.12 (management)', '172.16.60.22 (iSCSI)'], ifs: ['SET team Gi1/0/5 + Gi2/0/44', 'iSCSI on Te2/1/1'], svc: ['Hyper-V failover cluster node'], why: 'Two cluster nodes on shared iSCSI storage.' },
-      { id: 'esx', t: 'server', x: 960, y: 390, host: 'ESX1', role: 'VMware ESXi', st: 'design', ip: '172.16.9.13', ips: ['172.16.9.13', 'vCenter: 172.16.9.14'], ifs: ['Gi1/0/7 + Gi2/0/39 trunk'], svc: ['Hosts the web-course Linux VMs', 'Hosts DC2'] },
-      { id: 'nas', t: 'storage', x: 645, y: 690, host: 'TrueNAS', role: 'iSCSI target', st: 'design', ip: '172.16.60.10', ips: ['172.16.60.10 (storage)', '172.16.9.15 (management)'], ifs: ['2× 10 GbE LACP on Te1/1/2 + Te2/1/2'], svc: ['iSCSI target with CHAP for the cluster', 'Mirror pool'], why: 'Shared storage for the cluster on a VLAN that is not routed.' },
-      { id: 'pcs', t: 'workstation', x: 1200, y: 390, host: 'Lab PCs', role: '24 × Windows 11', st: 'design', svc: ['24 Windows 11 PCs', 'DHCP reservations .10+N'] },
-      { id: 'stu', t: 'users', x: 1465, y: 390, host: 'Student VLANs', role: 'One per student', st: 'design', svc: ['One isolated network per student', 'Student domain sN.lab.local', "DHCP/DNS from the student's own DC VM"], why: 'Each student gets an isolated network; the FortiGate denies traffic between student VLANs.' }
+      { id: 'ap', t: 'ap', x: 115, y: 414, host: 'FortiAP FAP221E', role: 'Wireless AP', st: 'design', ifs: ['Gi1/0/22 trunk (VLANs 9, 98)'], svc: ['WPA3-Enterprise SSID on VLAN 98'] },
+      { id: 'dc1', t: 'server', x: 325, y: 414, host: 'DC1', role: 'AD DS · DNS · DHCP', st: 'design', ip: '172.16.50.200', ips: ['172.16.50.200'], ifs: ['Teamed on Gi1/0/1 and Gi2/0/47'], svc: ['AD DS', 'DNS', 'DHCP (failover with DC2)', 'NPS'] },
+      { id: 'dc2', t: 'server', x: 325, y: 549, host: 'DC2', role: 'DC · VM on ESX1', st: 'design', ip: '172.16.50.202', ips: ['172.16.50.202'], svc: ['Second domain controller', 'Runs as a VM on ESX1'], why: 'DHCP failover partner for DC1.' },
+      { id: 'h1', t: 'server', x: 545, y: 414, host: 'PSWSCL1', role: 'Hyper-V cluster node', st: 'design', ip: '172.16.9.11', ips: ['172.16.9.11 (management)', '172.16.60.21 (iSCSI)'], ifs: ['SET team Gi1/0/3 + Gi2/0/43 (trunk 9, 50, 201–224)', 'iSCSI on Te1/1/1'], svc: ['Hyper-V failover cluster node'], why: 'Two cluster nodes on shared iSCSI storage.' },
+      { id: 'h2', t: 'server', x: 745, y: 414, host: 'PSWSCL2', role: 'Hyper-V cluster node', st: 'design', ip: '172.16.9.12', ips: ['172.16.9.12 (management)', '172.16.60.22 (iSCSI)'], ifs: ['SET team Gi1/0/5 + Gi2/0/44', 'iSCSI on Te2/1/1'], svc: ['Hyper-V failover cluster node'], why: 'Two cluster nodes on shared iSCSI storage.' },
+      { id: 'esx', t: 'server', x: 960, y: 414, host: 'ESX1', role: 'VMware ESXi', st: 'design', ip: '172.16.9.13', ips: ['172.16.9.13', 'vCenter: 172.16.9.14'], ifs: ['Gi1/0/7 + Gi2/0/39 trunk'], svc: ['Hosts the web-course Linux VMs', 'Hosts DC2'] },
+      { id: 'nas', t: 'storage', x: 645, y: 714, host: 'TrueNAS', role: 'iSCSI target', st: 'design', ip: '172.16.60.10', ips: ['172.16.60.10 (storage)', '172.16.9.15 (management)'], ifs: ['2× 10 GbE LACP on Te1/1/2 + Te2/1/2'], svc: ['iSCSI target with CHAP for the cluster', 'Mirror pool'], why: 'Shared storage for the cluster on a VLAN that is not routed.' },
+      { id: 'pcs', t: 'workstation', x: 1200, y: 414, host: 'Lab PCs', role: '24 × Windows 11', st: 'design', svc: ['24 Windows 11 PCs', 'DHCP reservations .10+N'] },
+      { id: 'stu', t: 'users', x: 1465, y: 414, host: 'Student VLANs', role: 'One per student', st: 'design', svc: ['One isolated network per student', 'Student domain sN.lab.local', "DHCP/DNS from the student's own DC VM"], why: 'Each student gets an isolated network; the FortiGate denies traffic between student VLANs.' }
     ],
     links: [
       { a: 'fgt', b: 'sw', thick: 1, label: '802.1Q trunk · LACP', side: -1, ifB: 'Gi1/0/23 · Gi2/0/48', vlan: 'native VLAN 999', vp: 0.3, proto: '802.1Q · LACP' },
-      { a: 'sw', b: 'ap', my: 260, ifB: 'Gi1/0/22', vlan: 'VLAN 9, 98', proto: '802.1Q trunk' },
-      { a: 'sw', b: 'dc1', my: 260, ifB: 'Gi1/0/1 · Gi2/0/47', proto: 'NIC team' },
-      { a: 'sw', b: 'h1', my: 260, ifB: 'Gi1/0/3 · Gi2/0/43', vlan: 'VLAN 9, 50, 201–224', proto: 'SET team · trunk' },
-      { a: 'sw', b: 'h2', my: 260, ifB: 'Gi1/0/5 · Gi2/0/44', proto: 'SET team' },
-      { a: 'sw', b: 'esx', my: 260, ifB: 'Gi1/0/7 · Gi2/0/39', proto: 'trunk' },
-      { a: 'sw', b: 'nas', via: [[800, 260], [1080, 260], [1080, 690]], tip: 'TrueNAS management · 172.16.9.15' },
-      { a: 'sw', b: 'pcs', my: 260 },
-      { a: 'sw', b: 'stu', my: 260 },
-      { a: 'h1', b: 'nas', thick: 1, dash: 1, pa: [-44, 0], via: [[501, 620], [645, 620]], label: 'iSCSI · VLAN 60 · 10 GbE · MTU 9000', lp: [800, 612], ifA: 'Te1/1/1', ifB: 'Te1/1/2 · Te2/1/2', speed: '10 GbE', proto: 'iSCSI' },
-      { a: 'h2', b: 'nas', thick: 1, dash: 1, pa: [44, 0], via: [[789, 620], [645, 620]], tip: 'iSCSI · VLAN 60 · 10 GbE · MTU 9000', ifA: 'Te2/1/1', speed: '10 GbE', proto: 'iSCSI' },
-      { a: 'h1', b: 'h2', thick: 1, pa: [40, 0], pb: [-40, 0], via: [[585, 448], [705, 448]], label: 'cluster / live migration\nVLAN 61 · 10 GbE DAC', lp: [645, 468], la: 'middle', speed: '10 GbE DAC' }
+      { a: 'sw', b: 'ap', pa: [-80, 0], my: 244, ifA: 'Gi1/0/22', vlan: 'VLAN 9, 98', proto: '802.1Q trunk' },
+      { a: 'sw', b: 'dc1', pa: [-56, 0], my: 266, ifA: 'Gi1/0/1 · Gi2/0/47', proto: 'NIC team' },
+      { a: 'sw', b: 'h1', pa: [-32, 0], my: 288, ifA: 'Gi1/0/3 · Gi2/0/43', vlan: 'VLAN 9, 50, 201–224', proto: 'SET team · trunk' },
+      { a: 'sw', b: 'h2', pa: [-8, 0], my: 310, ifA: 'Gi1/0/5 · Gi2/0/44', proto: 'SET team' },
+      { a: 'sw', b: 'esx', pa: [10, 0], my: 310, ifA: 'Gi1/0/7 · Gi2/0/39', proto: 'trunk' },
+      { a: 'sw', b: 'nas', pa: [34, 0], via: [[834, 288], [1080, 288], [1080, 714]], tip: 'TrueNAS management · 172.16.9.15' },
+      { a: 'sw', b: 'pcs', pa: [58, 0], my: 266 },
+      { a: 'sw', b: 'stu', pa: [82, 0], my: 244 },
+      { a: 'h1', b: 'nas', thick: 1, dash: 1, pa: [-44, 0], via: [[501, 644], [645, 644]], label: 'iSCSI · VLAN 60 · 10 GbE · MTU 9000', lp: [800, 636], ifA: 'Te1/1/1', ifB: 'Te1/1/2 · Te2/1/2', speed: '10 GbE', proto: 'iSCSI' },
+      { a: 'h2', b: 'nas', thick: 1, dash: 1, pa: [44, 0], via: [[789, 644], [645, 644]], tip: 'iSCSI · VLAN 60 · 10 GbE · MTU 9000', ifA: 'Te2/1/1', speed: '10 GbE', proto: 'iSCSI' },
+      { a: 'h1', b: 'h2', thick: 1, pa: [40, 0], pb: [-40, 0], via: [[585, 472], [705, 472]], label: 'cluster / live migration\nVLAN 61 · 10 GbE DAC', lp: [645, 492], la: 'middle', speed: '10 GbE DAC' }
     ],
-    // Not from a written flow list: illustrates the documented rule "traffic between student VLANs denied".
-    flows: [
-      { name: 'Student to student (denied)', steps: [
-        { n: 'stu', t: "A student's network sends traffic toward another student VLAN" },
-        { n: 'sw', t: 'The 3750-X carries it up the 802.1Q trunk to the FortiGate', insp: { vlan: 'Student VLAN (201–224)' } },
-        { n: 'fgt', t: 'The FortiGate denies traffic between student VLANs', block: 1, insp: { vlan: 'Student VLAN (201–224)', policy: 'Traffic between student VLANs: denied' } }] }
-    ]
+    flows: []
   }];
+
+  // data check: warns in the console when a map refers to a device that is not there, or a flow jumps between unlinked devices
+  MAPS.forEach(function (m) {
+    var ids = {};
+    m.nodes.forEach(function (n) { ids[n.id] = 1; });
+    var linked = function (a, b) { return m.links.some(function (l) { return (l.a === a && l.b === b) || (l.a === b && l.b === a); }); };
+    m.links.forEach(function (l) { [l.a, l.b].forEach(function (id) { if (!ids[id]) console.warn('[maps] ' + m.id + ': link uses unknown device "' + id + '"'); }); });
+    m.flows.forEach(function (f) {
+      f.steps.forEach(function (st, i) {
+        if (!ids[st.n]) console.warn('[maps] ' + m.id + ' / ' + f.name + ': step ' + (i + 1) + ' uses unknown device "' + st.n + '"');
+        else if (i && f.steps[i - 1].n !== st.n && ids[f.steps[i - 1].n] && !linked(f.steps[i - 1].n, st.n))
+          console.warn('[maps] ' + m.id + ' / ' + f.name + ': no link between "' + f.steps[i - 1].n + '" and "' + st.n + '" (step ' + i + ' to ' + (i + 1) + ')');
+      });
+    });
+  });
 
   // ---------- DOM ----------
   var svg = root.querySelector('.topo-svg'), side = root.querySelector('.topo-side'), tip = root.querySelector('.topo-tip'),
@@ -263,8 +272,12 @@
     return tag(gt, mx, my + (side > 0 ? -8 : 16), l.label, 't-label', 'middle');
   }
   function badge(gt, l, start) {
-    var p = l.pts, a = start ? p[0] : p[p.length - 1], b = start ? p[1] : p[p.length - 2], vert = a[0] === b[0],
-      f = Math.min(((vert ? H : W) / 2 + 12) / Math.hypot(b[0] - a[0], b[1] - a[1]), 0.5),
+    var p = l.pts, a = start ? p[0] : p[p.length - 1], b = start ? p[1] : p[p.length - 2], vert = a[0] === b[0];
+    if (start && l.my != null && vert) { // each switch link has its own row, so its badge sits on that row
+      var left = S.N[l.b].x < a[0];
+      return tag(gt, a[0] + (left ? -6 : 6), l.my - 5, l.ifA, 't-badge', left ? 'end' : 'start');
+    }
+    var f = Math.min(((vert ? H : W) / 2 + 12) / Math.hypot(b[0] - a[0], b[1] - a[1]), 0.5),
       x = a[0] + (b[0] - a[0]) * f, y = a[1] + (b[1] - a[1]) * f, s = start ? l.ifA : l.ifB;
     return vert ? tag(gt, x + 6, y + 4, s, 't-badge', 'start') : tag(gt, x, y - 6, s, 't-badge', 'middle');
   }
@@ -352,6 +365,7 @@
     var p = ptrs[e.pointerId], ids = Object.keys(ptrs);
     if (!p) return;
     if (ids.length === 1) {
+      if (e.pointerType === 'touch') return;
       var dx = e.clientX - p.x, dy = e.clientY - p.y;
       if (!S.moved && Math.hypot(dx, dy) < 5) return;
       if (!S.moved) { S.moved = true; svg.setPointerCapture(e.pointerId); svg.classList.add('grabbing'); hideTip(); }
@@ -360,20 +374,35 @@
       p.x = e.clientX; p.y = e.clientY;
     } else if (ids.length === 2) {
       p.x = e.clientX; p.y = e.clientY; S.moved = true;
-      var a = ptrs[ids[0]], b = ptrs[ids[1]], dist = Math.hypot(a.x - b.x, a.y - b.y);
-      if (pinch) { var c = toSvg((a.x + b.x) / 2, (a.y + b.y) / 2); zoomAt(c.x, c.y, dist / pinch); }
-      pinch = dist;
+      var a = ptrs[ids[0]], b = ptrs[ids[1]], dist = Math.hypot(a.x - b.x, a.y - b.y), cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
+      if (pinch) {
+        var k2 = svg.getScreenCTM().a;
+        S.vb.x -= (cx - pinch.cx) / k2; S.vb.y -= (cy - pinch.cy) / k2; // two fingers also pan
+        var c = toSvg(cx, cy); zoomAt(c.x, c.y, dist / pinch.d);
+      }
+      pinch = { d: dist, cx: cx, cy: cy };
     }
   });
   function up(e) { delete ptrs[e.pointerId]; pinch = null; svg.classList.remove('grabbing'); }
   svg.addEventListener('pointerup', up);
   svg.addEventListener('pointercancel', up);
+  // the page must stay scrollable: wheel zooms only with Ctrl/⌘ (a trackpad pinch also sends ctrlKey), one finger scrolls
+  var hintEl = root.querySelector('.topo-hint'), hintTimer;
+  function hint(msg) {
+    hintEl.textContent = msg; hintEl.classList.add('show');
+    clearTimeout(hintTimer); hintTimer = setTimeout(function () { hintEl.classList.remove('show'); }, 1600);
+  }
   svg.addEventListener('wheel', function (e) {
+    if (!e.ctrlKey && !e.metaKey) { hint('Ctrl/⌘ + scroll to zoom'); return; }
     e.preventDefault();
     var c = toSvg(e.clientX, e.clientY);
     zoomAt(c.x, c.y, Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0015)));
   }, { passive: false });
-  svg.addEventListener('dblclick', fit);
+  svg.addEventListener('touchmove', function (e) {
+    if (e.touches.length > 1) { if (e.cancelable) e.preventDefault(); } // two fingers belong to the map
+    else hint('Use two fingers to move the map');
+  }, { passive: false });
+  svg.addEventListener('dblclick', function (e) { if (!e.target.closest('.t-node')) fit(); });
 
   // ---------- hover, tooltip, selection ----------
   function mark(l) { l.el.classList.add('hl'); l.tags.forEach(function (t) { t.classList.add('hl'); }); S.N[l.a].el.classList.add('hl'); S.N[l.b].el.classList.add('hl'); }
@@ -438,7 +467,7 @@
     side.innerHTML = '<p class="tp-kicker">Overview</p><h3>' + esc(m.name) + '</h3>' +
       '<p class="tp-meta"><span class="tp-badge s-' + m.status + '">' + esc(m.badge) + '</span><span>' + esc(m.note) + '</span></p>' +
       '<p>' + esc(m.summary) + '</p><p class="tp-count">Devices on map: <strong>' + m.nodes.length + '</strong></p>' +
-      '<h4>Traffic flows</h4><ul class="tp-flows">' + m.flows.map(function (f, i) { return '<li><button type="button" data-flow="' + i + '">▶ ' + esc(f.name) + '</button></li>'; }).join('') + '</ul>' +
+      (m.flows.length ? '<h4>Traffic flows</h4><ul class="tp-flows">' + m.flows.map(function (f, i) { return '<li><button type="button" data-flow="' + i + '">▶ ' + esc(f.name) + '</button></li>'; }).join('') + '</ul>' : '') +
       '<p class="tp-hint">Select a device on the map to see its details.</p>';
   }
   function details(id) {
@@ -501,8 +530,9 @@
       if (mv.done) mv.done();
       return false;
     });
-    if (!S.flow && !reduce && now - S.lastAmb > 900) { S.lastAmb = now; ambient(); }
-    loop();
+    var amb = !S.flow && !reduce;
+    if (amb && now - S.lastAmb > 900) { S.lastAmb = now; ambient(); }
+    if (amb || S.movers.length) loop(); // otherwise move() or stopFlow() restarts it
   }
   function move(c, pts, dur, extra) {
     var mv = { el: c, pts: pts, len: plen(pts), t0: performance.now(), dur: dur };
@@ -535,7 +565,7 @@
     if (S.pk) S.pk.remove();
     removeX();
     S.pk = null; S.flow = null; S.step = -1; S.playing = false;
-    paintFlow();
+    paintFlow(); loop();
   }
   function goStep(k, animate) {
     var f = S.flow, prev = S.step, st = f.steps[k], tok = ++S.tok, n = S.N[st.n];

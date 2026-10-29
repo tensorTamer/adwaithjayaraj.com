@@ -119,6 +119,10 @@ h3{margin:0 0 6px;font-size:1.1rem}
 .js .reveal.in{opacity:1;transform:none}
 .js .card.reveal.in{transition:opacity .7s ease,transform .25s,border-color .25s,box-shadow .25s}
 
+/* if main.js never finishes (bad path, error), show everything after 3 s instead of leaving a blank page */
+@keyframes reveal-fallback{to{opacity:1;transform:none}}
+.js:not(.ready) .reveal{animation:reveal-fallback .01s 3s forwards}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}

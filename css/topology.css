@@ -22,7 +22,7 @@
 
 .topo-body{display:grid;grid-template-columns:minmax(0,1fr) 330px}
 .topo-stage{position:relative;height:580px;background:var(--bg)}
-.topo-svg{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.topo-svg{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .topo-svg.grabbing{cursor:grabbing}
 .topo-side{border-left:1px solid var(--line);padding:18px 20px;max-height:580px;overflow:auto;font-size:.92rem}
 .topo-tip{position:absolute;left:0;top:0;z-index:2;pointer-events:none;max-width:280px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);box-shadow:0 10px 28px -12px rgba(0,0,0,.55);font:500 .74rem/1.55 var(--mono);color:var(--text)}
@@ -147,3 +147,6 @@
 .t-x circle{fill:var(--card);stroke:var(--bad);stroke-width:2}
 .t-x path{stroke:var(--bad);stroke-width:2.6;stroke-linecap:round}
 .topo-svg:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+
+.topo-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);padding:6px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);font:500 .75rem var(--mono);color:var(--text);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .25s}
+.topo-hint.show{opacity:1}
