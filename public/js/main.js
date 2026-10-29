@@ -111,6 +111,6 @@
     }).observe(cv);
     d.addEventListener('visibilitychange', function () { cancelAnimationFrame(raf); if (heroOn && !d.hidden) loop(); });
   }
-  var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (cv.getBoundingClientRect().width !== W) { size(); drawStatic(); } }, 150); }); // phone address bars fire resize on scroll
+  var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { var r = cv.getBoundingClientRect(); if (r.width !== W || r.height !== H) { size(); drawStatic(); } }, 150); }); // phone address bars fire resize on scroll but do not change the hero size (svh)
   root.classList.add('ready'); // last line: tells the CSS fallback that setup finished
 })();
