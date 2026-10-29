@@ -17,8 +17,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/topology.css">
+<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/topology.css?v=2">
 <script>
 // Set theme and JS flag before first paint to avoid a flash.
 (function(){var d=document.documentElement;d.classList.add('js');
@@ -50,7 +50,7 @@ try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.the
   </nav>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 <section class="hero" id="top" aria-labelledby="hero-name">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
@@ -148,6 +148,8 @@ try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.the
   </div>
 </section>
 
+<a class="skip-map" href="#experience">Skip map</a>
+
 <section id="maps" class="section" aria-labelledby="maps-h">
   <div class="wrap wide">
     <h2 id="maps-h" class="reveal"><span class="mono tag">03</span> Network Maps</h2>
@@ -198,7 +200,7 @@ try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.the
         <p class="mono date">Apr 2025 – present</p>
         <h3>CAP 3 Lead</h3>
         <p class="org">Walmart · Charlottetown, PEI</p>
-        <p>Lead the overnight CAP 3 team: associates, assigning tasks and keeping the shift on schedule. Use handheld scanners and inventory systems, and report device issues to IT.</p>
+        <p>Lead the overnight CAP 3 team, assigning tasks and keeping the shift on schedule. Use handheld scanners and inventory systems, and report device issues to IT.</p>
       </li>
       <li class="reveal">
         <p class="mono date">Aug 2024 – Jan 2025</p>
@@ -284,8 +286,8 @@ try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.the
   <div class="wrap mono">© <span id="year">2026</span> Adwaith Jayaraj · Built by me · DNS on Cloudflare with DNSSEC</div>
 </footer>
 
-<script src="js/main.js" defer></script>
-<script src="js/topology-data.js" defer></script>
-<script src="js/topology.js" defer></script>
+<script src="js/main.js?v=2" defer></script>
+<script src="js/topology-data.js?v=2" defer></script>
+<script src="js/topology.js?v=2" defer></script>
 </body>
 </html>

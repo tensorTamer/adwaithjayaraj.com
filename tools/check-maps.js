@@ -41,6 +41,7 @@ for (const id of ['msp','cloud','cnet']) {
     for(let j=i+1;j<tags.length;j++) if(inter(t,tags[j])) res.push('label "'+t.t+'" overlaps label "'+tags[j].t+'"'); });
   // zones
   const zs=[...svg.querySelectorAll('.t-zborder')].map(r=>({x:+r.getAttribute('x'),y:+r.getAttribute('y'),w:+r.getAttribute('width'),h:+r.getAttribute('height')}));
+  if(!nodes.length||!zs.length) res.push('found no devices or zones: script out of date');
   const inside=(a,b)=>a.x>=b.x&&a.y>=b.y&&a.x+a.w<=b.x+b.w&&a.y+a.h<=b.y+b.h;
   zs.forEach((a,i)=>zs.forEach((b,j)=>{ if(j>i&&inter(a,b)&&!inside(a,b)&&!inside(b,a)) res.push('zones overlap '+i+','+j)}));
   // every node fully inside a zone or none; node partly overlapping a zone border?

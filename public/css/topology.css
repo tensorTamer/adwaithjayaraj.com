@@ -152,3 +152,6 @@
 .topo-hint.show{opacity:1}
 .tp-text{margin-top:16px;font-size:.85rem}
 .tp-text summary{cursor:pointer;font:600 .78rem var(--mono);color:var(--accent)}
+main:focus{outline:none}
+.skip-map{position:fixed;left:8px;top:-60px;z-index:100;padding:8px 14px;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none}
+.skip-map:focus{top:64px}

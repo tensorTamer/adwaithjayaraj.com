@@ -233,8 +233,9 @@
   svg.addEventListener('pointercancel', up);
   // the page must stay scrollable: wheel zooms only with Ctrl/⌘ (a trackpad pinch also sends ctrlKey), one finger scrolls
   var hintEl = root.querySelector('.topo-hint'), hintTimer;
-  function hint(msg) {
-    hintEl.textContent = msg; hintEl.classList.add('show');
+  function hint(msg) { // already showing: only the hide timer restarts, so a long swipe does not blink it
+    if (hintEl.textContent !== msg) hintEl.textContent = msg;
+    hintEl.classList.add('show');
     clearTimeout(hintTimer); hintTimer = setTimeout(function () { hintEl.classList.remove('show'); }, 1600);
   }
   svg.addEventListener('wheel', function (e) {
@@ -245,7 +246,7 @@
   }, { passive: false });
   svg.addEventListener('touchmove', function (e) {
     if (e.touches.length > 1) { if (e.cancelable) e.preventDefault(); } // two fingers belong to the map
-    else if (!hintEl.classList.contains('show')) hint('Use two fingers to move the map');
+    else hint('Use two fingers to move the map');
   }, { passive: false });
   svg.addEventListener('dblclick', function (e) { if (!e.target.closest('.t-node')) fit(); });
 
