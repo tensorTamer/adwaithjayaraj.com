@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adwaith Jayaraj · Networking &amp; Telecommunications Student</title>
+<meta name="description" content="Adwaith Jayaraj is a Computer Systems Networking &amp; Telecommunications (CNET) student at Holland College in Charlottetown, PEI, building real networks, security monitoring and cloud infrastructure.">
+<link rel="canonical" href="https://adwaithjayaraj.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Adwaith Jayaraj">
+<meta property="og:title" content="Adwaith Jayaraj · Networking &amp; Telecommunications Student">
+<meta property="og:description" content="I build real infrastructure (networks, servers and email) to understand how the internet actually works.">
+<meta property="og:url" content="https://adwaithjayaraj.com/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a1220">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/topology.css">
+<script>
+// Set theme and JS flag before first paint to avoid a flash.
+(function(){var d=document.documentElement;d.classList.add('js');
+try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Adwaith Jayaraj, home"><span class="mono">~/</span>adwaith</a>
+    <button class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#maps">Maps</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#more">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" id="theme-btn" aria-label="Switch to light mode">
+      <svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-name">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="term" role="region" aria-label="Animated terminal showing a DNS lookup of adwaithjayaraj.com">
+      <div class="term-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="mono term-title">adwaith@lab: ~</span>
+        <button class="skip-btn mono" id="skip-btn" type="button">skip ↵</button>
+      </div>
+      <pre class="term-body mono" id="term" aria-hidden="true"><span class="ln cmd"><span class="p">$ </span><span id="typed">dig +trace adwaithjayaraj.com</span><span class="caret"></span></span>
+<span class="ln dim">; illustrative output, trimmed</span>
+<span class="ln">.                    IN NS  <b>a.root-servers.net.</b></span>
+<span class="ln hop">  ↳ root servers: "ask .com"</span>
+<span class="ln">com.                 IN NS  <b>a.gtld-servers.net.</b></span>
+<span class="ln hop">  ↳ DS record found: signed with DNSSEC ✓</span>
+<span class="ln hop">  ↳ .com servers: "ask Cloudflare"</span>
+<span class="ln">adwaithjayaraj.com.  IN NS  <b>jaziel.ns.cloudflare.com.</b></span>
+<span class="ln">adwaithjayaraj.com.  IN NS  <b>kayleigh.ns.cloudflare.com.</b></span>
+<span class="ln hop">  ↳ Cloudflare: "here it is"</span>
+<span class="ln ok">adwaithjayaraj.com.  IN A   → Cloudflare edge ✓</span></pre>
+      <p class="sr-only">The terminal traces a DNS lookup from the root servers to the .com servers to Cloudflare and then to this site.</p>
+    </div>
+    <div class="intro" id="intro">
+      <p class="mono eyebrow">hello, world</p>
+      <h1 id="hero-name">Adwaith Jayaraj</h1>
+      <p class="title">Networking &amp; Telecommunications Student · Holland College</p>
+      <p class="muted">Charlottetown, PEI, Canada</p>
+      <div class="cta">
+        <a class="btn" href="#projects">View projects</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section" aria-labelledby="about-h">
+  <div class="wrap narrow reveal">
+    <h2 id="about-h"><span class="mono tag">01</span> About</h2>
+    <p class="lead">I'm a first-year Computer Systems Networking &amp; Telecommunications (CNET) student at Holland College, and an international student from Kerala, India. I don't wait for assignments to build things: I've built a full enterprise MSP lab (Active Directory, pfSense, Wazuh SIEM) and I'm moving it to Oracle Cloud with hybrid identity. I learn by building, and everything I list is real and documented on GitHub. This site runs on Cloudflare today and will move to servers I built myself.</p>
+    <p class="open-line mono">Open to summer IT roles in Charlottetown, PEI — MSP, helpdesk, sysadmin, cloud or security.</p>
+  </div>
+</section>
+
+<section id="projects" class="section" aria-labelledby="projects-h">
+  <div class="wrap">
+    <h2 id="projects-h" class="reveal"><span class="mono tag">02</span> Projects</h2>
+    <div class="cards">
+      <article class="card feature reveal">
+        <div class="card-top"><h3>Enterprise MSP Lab <span class="muted">(2025 – present)</span></h3>
+          <ul class="chips phases" aria-label="Project status"><li class="done">Phase 1 ✓</li><li class="done">Phase 2 ✓</li><li class="wip">Phase 3 in progress</li></ul></div>
+        <div class="phase-grid">
+          <div><h4 class="mono">Phase 1 · Core infrastructure</h4><p>Hyper-V on Windows Server 2022 Datacenter in Holland College's isolated datacenter lab; pfSense firewall with segmented WAN/LAN and strict routing; Active Directory primary domain controller; Windows 10 and Ubuntu endpoints domain-joined; GPO security baseline.</p></div>
+          <div><h4 class="mono">Phase 2 · Security monitoring</h4><p>Wazuh manager on Linux with agents on Windows Server 2022 and Windows 10; File Integrity Monitoring; CVE vulnerability detection; tuned log ingestion; detected simulated Nmap scans and directory traversal.</p></div>
+          <div><h4 class="mono">Phase 3 · OCI migration &amp; hybrid identity</h4><p>VCN, site-to-site IPsec VPN, network load balancer; Microsoft Entra Connect syncing on-prem AD to Entra ID.</p></div>
+        </div>
+        <ul class="chips" aria-label="Technologies"><li>Hyper-V</li><li>Windows Server 2022</li><li>pfSense</li><li>Active Directory</li><li>GPO</li><li>Wazuh</li><li>Oracle Cloud</li><li>IPsec VPN</li><li>Entra Connect</li></ul>
+        <p class="repo"><a class="btn ghost map-link" href="#maps" data-map="msp">Explore the interactive map ↓</a></p>
+        <p class="repo"><a href="https://github.com/tensorTamer/enterprise-msp-lab" rel="noopener">View on GitHub →</a></p>
+      </article>
+      <article class="card reveal">
+        <div class="card-top"><h3>Cloud Web &amp; Email Lab</h3><span class="status mono">In progress</span></div>
+        <p>My own network on Oracle Cloud Always Free: a VCN with 3 subnets, a Linux router/NAT firewall (iptables), an nginx + PHP + MariaDB web stack, and a Postfix/Dovecot/Rspamd mail server, built with Terraform.</p>
+        <ul class="chips" aria-label="Technologies"><li>Oracle Cloud</li><li>Terraform</li><li>iptables</li><li>nginx</li><li>PHP</li><li>MariaDB</li><li>Postfix</li><li>Dovecot</li><li>Rspamd</li></ul>
+        <p class="repo"><a class="btn ghost map-link" href="#maps" data-map="cloud">Explore the interactive map ↓</a></p>
+      </article>
+      <article class="card reveal">
+        <div class="card-top"><h3>CNET Lab Infrastructure Assessment &amp; Design</h3><span class="status mono">Coursework</span></div>
+        <p>Holland College coursework: assessment and redesign of a college lab, covering Cisco 3750-X switching, a FortiGate firewall, a Hyper-V cluster, VMware ESXi, iSCSI storage, per-student VLANs, Active Directory and traffic analysis.</p>
+        <ul class="chips" aria-label="Technologies"><li>Cisco 3750-X</li><li>FortiGate</li><li>Hyper-V</li><li>VMware ESXi</li><li>iSCSI</li><li>VLANs</li><li>Active Directory</li></ul>
+        <p class="repo"><a class="btn ghost map-link" href="#maps" data-map="cnet">Explore the interactive map ↓</a></p>
+      </article>
+      <article class="card reveal">
+        <div class="card-top"><h3>My Domain &amp; DNS</h3></div>
+        <p>adwaithjayaraj.com on Cloudflare with DNSSEC, MX/SPF records and email routing.</p>
+        <ul class="chips" aria-label="Technologies"><li>Cloudflare</li><li>DNSSEC</li><li>MX</li><li>SPF</li><li>Email routing</li></ul>
+      </article>
+    </div>
+    <div class="more-gh reveal">
+      <h3 class="mono">More on GitHub</h3>
+      <ul class="links">
+        <li><a class="btn ghost" href="https://github.com/tensorTamer/AI-Translator-App" rel="noopener">AI Translator App</a></li>
+        <li><a class="btn ghost" href="https://github.com/tensorTamer/python-project" rel="noopener">Python project</a></li>
+        <li><a class="btn ghost" href="https://github.com/tensorTamer/JP-Morgan-virtual-internship" rel="noopener">JPMorgan virtual internship</a></li>
+      </ul>
+    </div>
+    <div class="todo reveal" role="group" aria-labelledby="next-h">
+      <p class="mono todo-h" id="next-h"><span class="p">$</span> cat whats-next.md</p>
+      <ul class="mono">
+        <li><span aria-hidden="true">[ ]</span> CompTIA Network+ <em>(exam booked)</em></li>
+        <li><span aria-hidden="true">[ ]</span> MCP server that makes Wazuh alerts queryable by AI</li>
+        <li><span aria-hidden="true">[ ]</span> Complete OCI migration: full hybrid cloud lab</li>
+        <li><span aria-hidden="true">[ ]</span> CompTIA Security+</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="maps" class="section" aria-labelledby="maps-h">
+  <div class="wrap wide">
+    <h2 id="maps-h" class="reveal"><span class="mono tag">03</span> Network Maps</h2>
+    <p class="lead reveal">Interactive topologies of my labs. Drag to pan, scroll or pinch to zoom, double-click to reset. Select a device for details, or play a traffic flow.</p>
+    <div class="topo reveal" id="topo">
+      <div class="topo-tabs" role="tablist" aria-label="Network maps">
+        <button type="button" role="tab" id="tab-msp" aria-controls="topo-body" aria-selected="true" data-map="msp">Enterprise MSP Lab</button>
+        <button type="button" role="tab" id="tab-cloud" aria-controls="topo-body" aria-selected="false" tabindex="-1" data-map="cloud">Cloud Web &amp; Email Lab</button>
+        <button type="button" role="tab" id="tab-cnet" aria-controls="topo-body" aria-selected="false" tabindex="-1" data-map="cnet">CNET Lab Redesign</button>
+      </div>
+      <div class="topo-toolbar">
+        <div class="tb-group" role="group" aria-label="View">
+          <button type="button" class="icon-btn" data-act="zoomin" aria-label="Zoom in">+</button>
+          <button type="button" class="icon-btn" data-act="zoomout" aria-label="Zoom out">−</button>
+          <button type="button" class="icon-btn tb-fit" data-act="fit" aria-label="Fit map to view">Fit</button>
+          <button type="button" class="icon-btn" data-act="full" aria-label="Full screen" aria-pressed="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+        <fieldset class="tb-layers">
+          <legend class="sr-only">Layers</legend>
+          <label class="layer"><input type="checkbox" data-layer="ip" checked> IP addresses</label>
+          <label class="layer"><input type="checkbox" data-layer="ports" checked> Ports &amp; protocols</label>
+          <label class="layer"><input type="checkbox" data-layer="vlan" checked> VLANs / subnets</label>
+          <label class="layer"><input type="checkbox" data-layer="ifn" checked> Interface names</label>
+        </fieldset>
+      </div>
+      <div class="topo-body" id="topo-body" role="tabpanel" aria-labelledby="tab-msp">
+        <div class="topo-stage">
+          <svg class="topo-svg" role="group" tabindex="0" aria-label="Network map"></svg>
+          <div class="topo-tip" role="tooltip" hidden></div>
+        </div>
+        <aside class="topo-side" aria-label="Map details"></aside>
+      </div>
+      <div class="topo-legend" role="group" aria-label="Legend"></div>
+      <p class="sr-only topo-live" aria-live="polite"></p>
+    </div>
+    <noscript><p class="muted">The interactive maps need JavaScript.</p></noscript>
+  </div>
+</section>
+
+<section id="experience" class="section" aria-labelledby="exp-h">
+  <div class="wrap narrow">
+    <h2 id="exp-h" class="reveal"><span class="mono tag">04</span> Experience</h2>
+    <ol class="timeline">
+      <li class="reveal">
+        <p class="mono date">Apr 2025 – present</p>
+        <h3>Overnight Associate</h3>
+        <p class="org">Walmart · Charlottetown, PEI</p>
+        <p>Handheld inventory scanners and stock systems; reported device issues to IT; reliable, independent troubleshooting in a fast-paced environment.</p>
+      </li>
+      <li class="reveal">
+        <p class="mono date">Aug 2024 – Jan 2025</p>
+        <h3>Store Associate</h3>
+        <p class="org">Winners · Charlottetown, PEI</p>
+        <p>Point-of-sale and retail systems; customer inquiries and transactions.</p>
+      </li>
+      <li class="reveal">
+        <p class="mono date">Apr 2022 – Nov 2023</p>
+        <h3>Assistant Brand Manager</h3>
+        <p class="org">Reliance Retail · Kerala, India</p>
+        <p>Sales and inventory systems; main technical and customer contact, resolving complex issues.</p>
+      </li>
+      <li class="reveal">
+        <p class="mono date">Jan – Mar 2022 · remote</p>
+        <h3>Software Engineering Virtual Internship</h3>
+        <p class="org">JPMorgan Chase &amp; Co.</p>
+        <p>Set up a dev environment, fixed a broken repository, and used JPMorgan's open-source Perspective library to build a live data-feed graph for traders.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="skills" class="section" aria-labelledby="skills-h">
+  <div class="wrap">
+    <h2 id="skills-h" class="reveal"><span class="mono tag">05</span> Skills</h2>
+    <div class="skills">
+      <div class="card reveal"><h3 class="mono">Networking</h3><ul class="chips"><li>TCP/IP</li><li>DNS</li><li>DHCP</li><li>VLANs</li><li>VPN</li><li>pfSense</li><li>Cisco/CCNA concepts</li><li>OSI model</li></ul></div>
+      <div class="card reveal"><h3 class="mono">Systems</h3><ul class="chips"><li>Windows Server 2022</li><li>Active Directory</li><li>Group Policy</li><li>Linux (Ubuntu)</li><li>Hyper-V</li><li>VMware ESXi</li></ul></div>
+      <div class="card reveal"><h3 class="mono">Cloud &amp; Hybrid</h3><ul class="chips"><li>Oracle Cloud (VCN, site-to-site VPN, NLB, FastConnect, DNS)</li><li>Azure Entra ID</li><li>Entra Connect</li><li>Cloudflare</li><li>Terraform</li></ul></div>
+      <div class="card reveal"><h3 class="mono">Security &amp; SIEM</h3><ul class="chips"><li>Wazuh</li><li>File Integrity Monitoring</li><li>CVE detection</li><li>Log analysis</li><li>Threat emulation</li><li>Firewalls</li><li>DNSSEC</li><li>SPF/DKIM/DMARC</li></ul></div>
+      <div class="card reveal"><h3 class="mono">IT Support &amp; M365</h3><ul class="chips"><li>Troubleshooting (A+ level concepts)</li><li>Windows/macOS/Linux/iOS/Android support</li><li>Remote desktop</li><li>Office 365 admin</li><li>Teams</li><li>SharePoint</li><li>Outlook</li><li>Service-desk workflows</li></ul></div>
+      <div class="card reveal"><h3 class="mono">Scripting &amp; Data</h3><ul class="chips"><li>PowerShell</li><li>Python</li><li>NumPy</li><li>Pandas</li><li>Git</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="more" class="section" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h" class="reveal"><span class="mono tag">06</span> Certifications &amp; Leadership</h2>
+    <div class="certs">
+      <div class="card cert reveal"><h3>Oracle Cloud Infrastructure 2025 Certified Associate</h3><p class="org">Oracle</p><span class="status mono">Issued 2025</span></div>
+      <div class="card cert reveal"><h3>OCI Networking Professional</h3><p class="org">Oracle</p><span class="status mono">In progress</span></div>
+      <div class="card cert reveal"><h3>CompTIA Network+</h3><p class="org">CompTIA</p><span class="status mono">In progress (exam booked)</span></div>
+      <div class="card cert reveal"><h3>IT Service Desk: Customer Service Foundations</h3><p class="org">LinkedIn Learning</p><span class="status mono">Issued 2025</span></div>
+      <div class="card cert reveal"><h3>TCS Young Professional</h3><p class="org">Tata Consultancy Services</p><span class="status mono">Aug 2022</span></div>
+      <div class="card cert reveal"><h3>Emergency First Aid &amp; CPR/AED Level C</h3><p class="org">Canadian Red Cross</p><span class="status mono">Valid to Jun 2027</span></div>
+      <div class="card cert reveal"><h3>Data skills</h3><ul class="chips"><li>NumPy</li><li>Pandas</li><li>Python</li><li>R Programming</li><li>Data Management</li></ul></div>
+    </div>
+    <div class="two">
+      <div class="reveal">
+        <h3>Education</h3>
+        <p>Computer Systems Networking &amp; Telecommunications (CNET), Holland College, Charlottetown, PEI<br><span class="muted">Sep 2025 – expected graduation April 2027</span></p>
+        <h3>Languages</h3>
+        <ul class="chips big"><li>English (fluent)</li><li>Malayalam (fluent)</li><li>Hindi (basic)</li></ul>
+      </div>
+      <div class="reveal">
+        <h3>Leadership &amp; Volunteering</h3>
+        <ul class="plain">
+          <li><strong>Event Organizer, Canadian Cancer Society</strong>, Charlottetown<br><span class="muted">Mar 2024 – present</span> · Coordinated a fundraising event that raised over $10,000.</li>
+          <li><strong>National Cadet Corps (NCC), Kerala</strong><br>NCC Cadet Award 2022 (regional level). Led teams of up to 20 cadets across 3 camps.</li>
+          <li><strong>Community Support Volunteer</strong>, local food bank, Kerala<br><span class="muted">May – Jun 2022</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="section" aria-labelledby="contact-h">
+  <div class="wrap narrow reveal">
+    <h2 id="contact-h"><span class="mono tag">07</span> Contact</h2>
+    <p class="lead">Want to talk networks, servers or email? Send me a message.</p>
+    <ul class="links">
+      <li><a class="btn" href="mailto:adwaith@adwaithjayaraj.com">adwaith@adwaithjayaraj.com</a></li>
+      <li><a class="btn ghost" href="https://github.com/tensorTamer" rel="me noopener">GitHub</a></li>
+      <li><a class="btn ghost" href="https://www.linkedin.com/in/adwaith-jayaraj/" rel="me noopener">LinkedIn</a></li>
+    </ul>
+    <p class="muted">Charlottetown, PEI, Canada</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap mono">© <span id="year">2026</span> Adwaith Jayaraj · Built by me · DNS on Cloudflare with DNSSEC</div>
+</footer>
+
+<script src="js/main.js" defer></script>
+<script src="js/topology.js" defer></script>
+</body>
+</html>
